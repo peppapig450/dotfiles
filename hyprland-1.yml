@@ -1,0 +1,3 @@
+files:
+  - source: hyprland-1/
+    destination: ~/.config/hypr/

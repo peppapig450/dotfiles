@@ -85,6 +85,7 @@
     "hreload": "Restart the shell by re-executing zsh.",
     "rc-cursor": "Reset the terminal cursor to its default style.",
     "j": "Jump to directories using zoxide.",
-    "ji": "Interactively jump to directories using zoxide and fzf."
+    "ji": "Interactively jump to directories using zoxide and fzf.",
+    "cp": "Use reflink when copying files."
   }
 }

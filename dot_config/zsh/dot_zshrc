@@ -11,16 +11,11 @@ ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/.zcompdump-${HOST}-${ZSH_VERSION}"
 # Make sure the directory exists
 mkdir -p "$(dirname "$ZSH_COMPDUMP")"
 
-# Add antidote to fpath BEFORE compinit
-source "${HOME}/.antidote/antidote.zsh"
-
-# Load completions and prompt
-autoload -Uz compinit promptinit
-compinit -d "${ZSH_COMPDUMP}"
-promptinit; prompt gentoo
-
 # Cache completions
 zstyle ':completion::complete:*' use-cache 1
+
+# Use friendly non ugly names for antidote dirs
+zstyle ':antidote:bundle' use-friendly-names 'yes'
 
 # fzf keybindings
 [[ -f /usr/share/fzf/key-bindings.zsh ]] && source /usr/share/fzf/key-bindings.zsh
@@ -46,13 +41,21 @@ zsh_plugins="${ZDOTDIR}/.zsh_plugins"
 zsh_plugins_list="${zsh_plugins}.txt"
 [[ -f ${zsh_plugins_list} ]] || touch "${zsh_plugins_list}"
 
+# Lazy load antidote from its functions directory
+fpath=(${HOME}/.antidote/functions $fpath)
+autoload -Uz antidote
+
 # Generate the static plugin file if need be
 if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins_list} ]]; then
-	antidote bundle < "${zsh_plugins_list}" > "${zsh_plugins}.zsh"
+	antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
 fi
 
 # Source the static plugin file
 source "${zsh_plugins}.zsh" # PLUGINS GO BRRRR
+
+# Load completions
+autoload -Uz compinit
+compinit -d "${ZSH_COMPDUMP}"
 
 # Source config stuff
 for file in .zsh_aliases .zsh_functions .shell_vars; do

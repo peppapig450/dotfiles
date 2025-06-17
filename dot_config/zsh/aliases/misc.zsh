@@ -12,3 +12,6 @@ alias rc-cursor='reset_cursor'
 alias j='z'
 alias ji='zj'
 
+# Use reflink for cp
+alias cp='cp --reflink=auto'
+

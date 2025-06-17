@@ -1,5 +1,5 @@
 # Early exit on non-interactive shell
-[[ $- != *i* ]] && return
+[[ -o interactive ]] || return 0
 
 # Force Emacs-style keybinds so Control-A & E work
 bindkey -e

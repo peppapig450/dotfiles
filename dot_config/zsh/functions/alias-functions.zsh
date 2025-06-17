@@ -12,7 +12,6 @@
 #       - alias-add-help
 #       - _alias_help_complete
 # ─────────────────────────────────────────────────────────────────────────────
-[[ -o interactive ]] || return 0
 
 # Get the absolute path to this scripts directory
 script_dir="${(%):-%x}"

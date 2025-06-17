@@ -60,7 +60,7 @@
     "catn": "Show file using bat with numbers style."
   },
   "chezmoi.zsh": {
-    "cz": "Run chezmoi (dotfiles manager) command.",
+    "chez": "Run chezmoi (dotfiles manager) command.",
     "czcd": "Open a shell in the source directory managed by chezmoi.",
     "czd": "Show the diff between the source state and the destination state.",
     "cza": "Apply changes from chezmoi source to destination (update dotfiles).",

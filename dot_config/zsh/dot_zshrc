@@ -11,6 +11,10 @@ ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/.zcompdump-${HOST}-${ZSH_VERSION}"
 # Make sure the directory exists
 mkdir -p "$(dirname "$ZSH_COMPDUMP")"
 
+# Load completions
+autoload -Uz compinit
+compinit -d "${ZSH_COMPDUMP}"
+
 # Cache completions
 zstyle ':completion::complete:*' use-cache 1
 
@@ -52,10 +56,6 @@ fi
 
 # Source the static plugin file
 source "${zsh_plugins}.zsh" # PLUGINS GO BRRRR
-
-# Load completions
-autoload -Uz compinit
-compinit -d "${ZSH_COMPDUMP}"
 
 # Source config stuff
 for file in .zsh_aliases .zsh_functions .shell_vars; do

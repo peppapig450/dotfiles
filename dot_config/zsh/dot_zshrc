@@ -62,6 +62,17 @@ for file in .zsh_aliases .zsh_functions .shell_vars; do
   [[ -f "${ZDOTDIR}/${file}" ]] && source "${ZDOTDIR}/${file}"
 done
 
+# Load starship before we start deferring stuff
+# Don't start Starship in a TTY (eugh icons no load = ugly!)
+if [[ -t 1 && ${TERM} != "linux" ]]; then
+	eval "$(starship init zsh)"
+fi
+
+# Initialize hook system
+if [[ -f "${ZDOTDIR}/hooks/hooks-loader.zsh" ]]; then
+	zsh-defer source "${ZDOTDIR}/hooks/hooks-loader.zsh"
+fi
+
 # disable sort when completing git checkout
 zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support
@@ -94,9 +105,4 @@ fi
 # Setup zoxide
 if (( $+commands[zoxide] )); then
 	eval "$(zoxide init zsh)"
-fi
-
-# Don't start Starship in a TTY (eugh icons no load = ugly!)
-if [[ -t 1 && ${TERM} != "linux" ]]; then
-	eval "$(starship init zsh)"
 fi

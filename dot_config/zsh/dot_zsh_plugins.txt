@@ -6,3 +6,9 @@ zdharma-continuum/fast-syntax-highlighting
 
 # Fuzzy Tab completion
 Aloxaf/fzf-tab
+
+# Load zsh-hooks for custom zsh hooks
+zsh-hooks/zsh-hooks
+
+# Add zsh-defer to staged loading of stuff
+romkatv/zsh-defer

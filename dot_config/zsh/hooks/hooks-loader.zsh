@@ -13,5 +13,5 @@ hooks_dir="${hooks_dir:A:h}"
 
  # Auto source all hook files
 for hook_file in "${hooks_dir}"/**/*.zsh(.N); do
-  [[ ${hook_file:t} != "hook-loader.zsh" ]] && source "${hook_file}"
+  [[ ${hook_file:t} != "hooks-loader.zsh" ]] && source "${hook_file}"
 done

@@ -57,7 +57,9 @@
     "catgit": "Show file using bat with changes (git) style.",
     "catd": "Show file using bat with default style.",
     "catfull": "Show file using bat with full style.",
-    "catn": "Show file using bat with numbers style."
+    "catn": "Show file using bat with numbers style.",
+    "catfhead": "Show file using bat with filename headers.",
+    "catcopy": "Show file using bat with filename headers, suitable for piping to wl-copy."
   },
   "chezmoi.zsh": {
     "chez": "Run chezmoi (dotfiles manager) command.",

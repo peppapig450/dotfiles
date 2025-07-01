@@ -5,7 +5,8 @@
 bindkey -e
 
 # Redirect compdump to XDG cache dir, like a civilized person
-ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/.zcompdump-${HOST}-${ZSH_VERSION}"
+CACHE_HOME=${XDG_CACHE_HOME:-${HOME}/.cache}
+ZSH_COMPDUMP="${CACHE_HOME}/zsh/.zcompdump-${HOST}-${ZSH_VERSION}"
 
 # Make sure the directory exists
 mkdir -p "$(dirname "$ZSH_COMPDUMP")"

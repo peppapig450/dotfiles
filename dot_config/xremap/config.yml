@@ -1,0 +1,5 @@
+modmap:
+  - name: Global
+    remap:
+      # Left Control -> Caps Lock
+      CapsLock: Control_L

@@ -13,7 +13,7 @@ config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
 
 -- cursor
-config.animation_fps = 70
+config.animation_fps = 1
 config.cursor_blink_ease_in = "EaseIn"
 config.cursor_blink_ease_out = "EaseOut"
 config.default_cursor_style = "BlinkingBar"

@@ -31,9 +31,10 @@ setopt append_history inc_append_history share_history hist_ignore_dups
 setopt hist_ignore_space hist_reduce_blanks hist_verify 
 
 # History stuff
+# TODO: use cache home here?
 HISTFILE="${HOME}/.zsh_history"
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=25000
+SAVEHIST=25000
 
 # Lazy load antidote plugins so the static list is only updated
 # when the plugin list changes.

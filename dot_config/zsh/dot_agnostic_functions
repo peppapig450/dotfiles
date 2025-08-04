@@ -240,3 +240,35 @@ trace_log() {
 
   printf "Trace log saved to %s\n" "${logfile}" 
 }
+
+# This runs clang's static analyzer with additional checks set
+# NOTE: This currently only works for make, a version that supports other build systems
+# would be more appropiate as a standalone script
+analyze_build() {
+  for cmd in clang clang++ make scan-build; do
+    if ! command -v "$cmd" &>/dev/null; then
+      printf "Missing required command: %s\n" "$cmd" >&2
+      return 1
+    fi
+  done
+
+  job_count=$(( ($(getconf _NPROCESSORS_ONLN) + 1) / 2 ))
+
+  make clean &&
+  scan-build \
+      -enable-checker optin.taint.GenericTaint \
+      -enable-checker optin.taint.TaintedAlloc \
+      -enable-checker optin.taint.TaintedDiv \
+      -enable-checker optin.core.EnumCastOutOfRange \
+      -enable-checker optin.cplusplus.UninitializedObject \
+      -enable-checker optin.cplusplus.VirtualCall \
+      -enable-checker optin.performance.Padding \
+      -enable-checker optin.portability.UnixAPI \
+      -enable-checker security.cert.env.InvalidPtr \
+      -enable-checker security.PutenvStackArray \
+      -enable-checker security.PointerSub \
+      -enable-checker unix.MismatchedDeallocator \
+      --use-cc=clang \
+      --use-c++=clang++ \
+      make -j"${job_count}"
+}

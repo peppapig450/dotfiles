@@ -272,3 +272,17 @@ analyze_build() {
       --use-c++=clang++ \
       make -j"${job_count}"
 }
+
+# Function that handles emerging dependencies for a given ebuild, this is useful
+# for developing ebuilds.
+emerge_ebuild_deps() {
+  if ! command -v emerge &> /dev/null; then
+    printf "Not on gentoo or 'emerge' not found, exiting.\n" >&2
+  fi
+
+  if (($@ != 1)); then
+    printf "Invalid number of arguments passed.\n" >&2
+  fi
+
+  doas emerge -av1o --with-test-deps -- "$1"
+}

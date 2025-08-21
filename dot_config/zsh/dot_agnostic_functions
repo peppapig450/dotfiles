@@ -286,3 +286,22 @@ emerge_ebuild_deps() {
 
   doas emerge -av1o --with-test-deps -- "$1"
 }
+
+# Prepend Cargo bin directory to PATH
+cargo_path_on() {
+    local cargo_home="${CARGO_HOME:-$HOME/.cargo}"
+    export OLD_PATH="$PATH"
+    export PATH="$cargo_home/bin:$PATH"
+    echo "Cargo bin prepended to PATH."
+}
+
+# Reset PATH back to original
+cargo_path_off() {
+    if [[ -n ${OLD_PATH} ]]; then
+        export PATH="$OLD_PATH"
+        unset OLD_PATH
+        echo "PATH restored to original."
+    else
+        echo "No saved PATH to restore."
+    fi
+}
